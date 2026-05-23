@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ErgoCampus — Peligros Biomecánicos | IBERO SST</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rojo: #C41230;
+  --rojo-oscuro: #8B0C22;
+  --rojo-claro: #e8193e;
+  --dorado: #D4941A;
+  --dorado-claro: #F5B942;
+  --oscuro: #121820;
+  --gris-oscuro: #1E2530;
+  --gris-medio: #4A5568;
+  --gris-claro: #E8ECF0;
+  --fondo: #F4F1EC;
+  --blanco: #FFFFFF;
+  --verde: #1A7A4A;
+  --verde-claro: #E8F5EE;
+  --naranja: #D4621A;
+  --naranja-claro: #FEF0E6;
+  --azul: #1A4A8B;
+  --azul-claro: #E8EFF8;
+  --sombra: 0 4px 20px rgba(0,0,0,0.10);
+  --sombra-fuerte: 0 8px 40px rgba(0,0,0,0.18);
+  --radio: 14px;
+  --radio-grande: 22px;
+  --transicion: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--fondo);
+  color: var(--oscuro);
+  min-height: 100vh;
+  line-height: 1.65;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--oscuro);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+  height: 64px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.nav-brand {
+  display: flex; align-items: center; gap: 0.75rem;
+  text-decoration: none;
+}
+.nav-logo {
+  width: 38px; height: 38px;
+  background: var(--rojo);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif;
+  font-weight: 800; font-size: 1rem;
+  color: var(--blanco);
+  letter-spacing: -1px;
+}
+.nav-title {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700; font-size: 1.1rem;
+  color: var(--blanco);
+}
+.nav-title span { color: var(--dorado-claro); }
+
+.nav-links {
+  display: flex; align-items: center; gap: 0.25rem;
+  list-style: none;
+}
+.nav-links a {
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.88rem; font-weight: 500;
+  transition: var(--transicion);
+}
+.nav-links a:hover, .nav-links a.active {
+  background: rgba(255,255,255,0.12);
+  color: var(--blanco);
+}
+.nav-links a.active { color: var(--dorado-claro); }
+
+.nav-badge {
+  background: var(--rojo);
+  color: var(--blanco);
+  font-size: 0.62rem; font-weight: 700;
+  padding: 1px 5px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+
+/* ── HERO ── */
+.hero {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--oscuro) 0%, var(--gris-oscuro) 60%, #2A1A1A 100%);
+  padding: 5rem 2rem 4rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(196,18,48,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -100px; left: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(212,148,26,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr auto; gap: 3rem;
+  align-items: center; position: relative; z-index: 1;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(196,18,48,0.2); border: 1px solid rgba(196,18,48,0.4);
+  color: #FF8099; font-size: 0.78rem; font-weight: 600;
+  padding: 0.35rem 0.8rem; border-radius: 20px;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 1.25rem;
+}
+.hero h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800; line-height: 1.15;
+  color: var(--blanco); margin-bottom: 1rem;
+}
+.hero h1 span { color: var(--dorado-claro); }
+.hero p {
+  color: rgba(255,255,255,0.65);
+  font-size: 1.05rem; max-width: 520px; margin-bottom: 2rem;
+}
+.hero-stats {
+  display: flex; gap: 2rem;
+}
+.hero-stat {
+  text-align: center;
+}
+.hero-stat-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 2rem; font-weight: 800;
+  color: var(--dorado-claro); line-height: 1;
+}
+.hero-stat-label {
+  font-size: 0.75rem; color: rgba(255,255,255,0.5);
+  text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0.25rem;
+}
+
+/* Semana actual badge */
+.semana-badge {
+  background: rgba(212,148,26,0.15); border: 1px solid rgba(212,148,26,0.4);
+  border-radius: var(--radio-grande);
+  padding: 1.5rem; text-align: center; min-width: 160px;
+}
+.semana-badge-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 3rem; font-weight: 800;
+  color: var(--dorado-claro); line-height: 1;
+}
+.semana-badge-label {
+  color: rgba(255,255,255,0.6); font-size: 0.8rem;
+  text-transform: uppercase; letter-spacing: 1px; margin-top: 0.4rem;
+}
+.semana-badge-sub {
+  color: var(--dorado-claro); font-size: 0.85rem; font-weight: 500;
+  margin-top: 0.3rem;
+}
+
+/* ── SECCIONES GENERALES ── */
+section {
+  max-width: 1100px; margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.section-header {
+  margin-bottom: 2.5rem;
+}
+.section-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--rojo); margin-bottom: 0.6rem;
+}
+.section-header h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800; color: var(--oscuro); line-height: 1.2;
+}
+.section-header p {
+  color: var(--gris-medio); font-size: 1rem; margin-top: 0.5rem; max-width: 600px;
+}
+
+/* ── TIMELINE ── */
+#inicio { padding-top: 4rem; }
+
+.timeline-wrapper {
+  background: var(--blanco);
+  border-radius: var(--radio-grande);
+  padding: 2rem;
+  box-shadow: var(--sombra);
+  margin-bottom: 2.5rem;
+  overflow-x: auto;
+}
+.timeline-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.85rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--gris-medio); margin-bottom: 1.5rem;
+}
+.timeline {
+  display: flex; gap: 0; min-width: 700px;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute; top: 28px; left: 28px; right: 28px; height: 3px;
+  background: var(--gris-claro); z-index: 0;
+}
+.timeline-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  position: relative; z-index: 1;
+}
+.timeline-dot {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif;
+  font-weight: 800; font-size: 1rem;
+  border: 3px solid var(--gris-claro);
+  background: var(--blanco);
+  color: var(--gris-medio);
+  transition: var(--transicion);
+  cursor: default;
+}
+.timeline-item.pasada .timeline-dot {
+  background: var(--gris-claro); border-color: var(--gris-claro); color: var(--gris-medio);
+}
+.timeline-item.actual .timeline-dot {
+  background: var(--rojo); border-color: var(--rojo); color: var(--blanco);
+  box-shadow: 0 0 0 5px rgba(196,18,48,0.2);
+  animation: pulse-dot 2s infinite;
+}
+.timeline-item.proxima .timeline-dot {
+  background: var(--fondo); border-color: var(--dorado); color: var(--dorado);
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 5px rgba(196,18,48,0.2); }
+  50% { box-shadow: 0 0 0 10px rgba(196,18,48,0.08); }
+}
+.timeline-info { margin-top: 0.75rem; text-align: center; max-width: 120px; }
+.timeline-semana {
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; color: var(--gris-medio);
+}
+.timeline-tema {
+  font-size: 0.78rem; color: var(--oscuro); line-height: 1.3; margin-top: 0.2rem;
+}
+.timeline-item.actual .timeline-tema { color: var(--rojo); font-weight: 600; }
+.timeline-fecha {
+  font-size: 0.68rem; color: var(--gris-medio); margin-top: 0.2rem;
+}
+.timeline-actividad {
+  font-size: 0.7rem; background: var(--rojo);
+  color: var(--blanco); border-radius: 4px;
+  padding: 1px 6px; margin-top: 0.3rem;
+  font-weight: 600;
+}
+.timeline-item.pasada .timeline-actividad { background: var(--gris-claro); color: var(--gris-medio); }
+.timeline-item.proxima .timeline-actividad { background: var(--dorado); color: var(--blanco); }
+
+/* ── CORTES ── */
+.cortes-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+.corte-card {
+  background: var(--blanco); border-radius: var(--radio-grande);
+  padding: 1.5rem; box-shadow: var(--sombra);
+  border-top: 4px solid var(--gris-claro);
+  transition: var(--transicion);
+}
+.corte-card.activo { border-top-color: var(--rojo); }
+.corte-card.proximo { border-top-color: var(--dorado); }
+.corte-card.futuro { border-top-color: var(--gris-claro); }
+.corte-card:hover { transform: translateY(-3px); box-shadow: var(--sombra-fuerte); }
+.corte-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--gris-medio); margin-bottom: 0.4rem;
+}
+.corte-pct {
+  font-family: 'Sora', sans-serif;
+  font-size: 2.2rem; font-weight: 800;
+  color: var(--oscuro); line-height: 1;
+}
+.corte-pct span { font-size: 1rem; color: var(--gris-medio); }
+.corte-acts { margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.corte-act-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.82rem;
+}
+.corte-act-dot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+}
+.activo .corte-act-dot { background: var(--rojo); }
+.proximo .corte-act-dot { background: var(--dorado); }
+.futuro .corte-act-dot { background: var(--gris-claro); }
+.corte-fecha {
+  font-size: 0.75rem; color: var(--gris-medio);
+  margin-top: 0.8rem; padding-top: 0.8rem;
+  border-top: 1px solid var(--gris-claro);
+}
+
+/* ── CALCULADORAS ── */
+#calculadoras { background: var(--fondo); }
+
+.calc-tabs {
+  display: flex; gap: 0.5rem; margin-bottom: 2rem;
+  border-bottom: 2px solid var(--gris-claro); padding-bottom: 0;
+}
+.calc-tab {
+  padding: 0.75rem 1.25rem;
+  font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.9rem;
+  cursor: pointer; border: none; background: none;
+  color: var(--gris-medio);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: var(--transicion);
+  border-radius: 8px 8px 0 0;
+}
+.calc-tab:hover { color: var(--rojo); background: rgba(196,18,48,0.05); }
+.calc-tab.active { color: var(--rojo); border-bottom-color: var(--rojo); }
+
+.calc-panel { display: none; }
+.calc-panel.active { display: block; }
+
+.calc-card {
+  background: var(--blanco); border-radius: var(--radio-grande);
+  box-shadow: var(--sombra); overflow: hidden;
+}
+.calc-header {
+  background: linear-gradient(135deg, var(--rojo) 0%, var(--rojo-oscuro) 100%);
+  padding: 1.75rem 2rem;
+  color: var(--blanco);
+}
+.calc-header h3 {
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.3rem;
+}
+.calc-header p { opacity: 0.8; font-size: 0.9rem; margin-top: 0.3rem; }
+.calc-body { padding: 2rem; }
+
+.calc-formula {
+  background: var(--fondo); border-radius: var(--radio);
+  padding: 1rem 1.5rem; margin-bottom: 2rem;
+  font-family: 'Sora', sans-serif; font-size: 0.95rem;
+  color: var(--gris-oscuro); text-align: center;
+  border: 1px solid var(--gris-claro);
+  font-weight: 600;
+}
+
+.calc-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.calc-field { display: flex; flex-direction: column; gap: 0.4rem; }
+.calc-label {
+  font-size: 0.83rem; font-weight: 600; color: var(--gris-oscuro);
+}
+.calc-label span { font-weight: 400; color: var(--gris-medio); }
+.calc-input {
+  padding: 0.65rem 1rem;
+  border: 2px solid var(--gris-claro); border-radius: 10px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+  color: var(--oscuro); background: var(--blanco);
+  transition: var(--transicion); outline: none;
+}
+.calc-input:focus { border-color: var(--rojo); }
+.calc-select {
+  padding: 0.65rem 1rem;
+  border: 2px solid var(--gris-claro); border-radius: 10px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+  color: var(--oscuro); background: var(--blanco);
+  cursor: pointer; outline: none;
+  transition: var(--transicion);
+}
+.calc-select:focus { border-color: var(--rojo); }
+
+.calc-btn {
+  width: 100%; padding: 1rem;
+  background: var(--rojo); color: var(--blanco);
+  border: none; border-radius: 12px;
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem;
+  cursor: pointer; transition: var(--transicion);
+  margin-bottom: 1.5rem;
+}
+.calc-btn:hover { background: var(--rojo-claro); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(196,18,48,0.3); }
+.calc-btn:active { transform: translateY(0); }
+
+.calc-resultado {
+  display: none;
+  background: var(--fondo); border-radius: var(--radio);
+  padding: 1.5rem; border: 2px solid var(--gris-claro);
+}
+.calc-resultado.visible { display: block; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.resultado-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;
+}
+.resultado-item {
+  background: var(--blanco); border-radius: var(--radio);
+  padding: 1rem; text-align: center;
+  border: 1px solid var(--gris-claro);
+}
+.resultado-val {
+  font-family: 'Sora', sans-serif; font-size: 1.8rem; font-weight: 800;
+  color: var(--oscuro);
+}
+.resultado-lbl { font-size: 0.75rem; color: var(--gris-medio); text-transform: uppercase; letter-spacing: 0.5px; }
+
+.riesgo-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 1rem; border-radius: 8px;
+  font-weight: 700; font-size: 0.9rem;
+}
+.riesgo-bajo { background: var(--verde-claro); color: var(--verde); }
+.riesgo-moderado { background: #FFF8E6; color: #B87A00; }
+.riesgo-alto { background: #FEE8EC; color: var(--rojo); }
+.riesgo-critico { background: #FFE0E0; color: #8B0000; }
+
+.factores-detalle {
+  margin-top: 1rem;
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 0.5rem;
+}
+.factor-item {
+  background: var(--blanco); border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--gris-claro); text-align: center;
+}
+.factor-nombre { font-size: 0.7rem; color: var(--gris-medio); font-weight: 700; text-transform: uppercase; }
+.factor-valor { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700; color: var(--oscuro); }
+
+/* RULA */
+.rula-step {
+  background: var(--blanco); border-radius: var(--radio-grande);
+  box-shadow: var(--sombra); margin-bottom: 1.25rem; overflow: hidden;
+}
+.rula-step-header {
+  padding: 1.25rem 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: var(--transicion);
+}
+.rula-step-header:hover { background: var(--fondo); }
+.rula-step-num {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--gris-claro); color: var(--gris-medio);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1rem;
+  flex-shrink: 0; transition: var(--transicion);
+}
+.rula-step.completado .rula-step-num { background: var(--verde); color: var(--blanco); }
+.rula-step.activo .rula-step-num { background: var(--rojo); color: var(--blanco); }
+.rula-step-titulo { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.95rem; }
+.rula-step-subtitulo { font-size: 0.8rem; color: var(--gris-medio); }
+.rula-step-body { padding: 1.5rem; display: none; }
+.rula-step.activo .rula-step-body, .rula-step.completado .rula-step-body { display: block; }
+
+.rula-opciones { display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0; }
+.rula-opcion {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--gris-claro); border-radius: 10px;
+  cursor: pointer; transition: var(--transicion);
+  background: var(--blanco);
+}
+.rula-opcion:hover { border-color: var(--rojo); background: rgba(196,18,48,0.03); }
+.rula-opcion.seleccionada { border-color: var(--rojo); background: rgba(196,18,48,0.06); }
+.rula-opcion input[type="radio"] { accent-color: var(--rojo); width: 18px; height: 18px; cursor: pointer; }
+.rula-opcion-texto { font-size: 0.88rem; color: var(--oscuro); }
+.rula-opcion-puntaje {
+  margin-left: auto;
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 0.9rem;
+  color: var(--rojo); background: rgba(196,18,48,0.08);
+  padding: 0.2rem 0.5rem; border-radius: 6px; min-width: 32px; text-align: center;
+}
+
+.rula-nav { display: flex; gap: 0.75rem; margin-top: 1rem; }
+.rula-btn-prev, .rula-btn-next {
+  padding: 0.65rem 1.25rem; border-radius: 10px;
+  font-weight: 700; font-size: 0.88rem; cursor: pointer;
+  border: 2px solid; transition: var(--transicion);
+}
+.rula-btn-prev { border-color: var(--gris-claro); background: var(--blanco); color: var(--gris-medio); }
+.rula-btn-prev:hover { border-color: var(--gris-medio); color: var(--oscuro); }
+.rula-btn-next { border-color: var(--rojo); background: var(--rojo); color: var(--blanco); }
+.rula-btn-next:hover { background: var(--rojo-claro); }
+
+.rula-resultado-final {
+  background: linear-gradient(135deg, var(--oscuro) 0%, var(--gris-oscuro) 100%);
+  border-radius: var(--radio-grande); padding: 2rem; color: var(--blanco);
+  margin-top: 1.5rem; display: none;
+  animation: fadeIn 0.5s ease;
+}
+.rula-resultado-final.visible { display: block; }
+.rula-score-big {
+  font-family: 'Sora', sans-serif; font-size: 4rem; font-weight: 800;
+  color: var(--dorado-claro); line-height: 1;
+}
+.rula-nivel { font-size: 1.1rem; font-weight: 600; color: var(--blanco); margin: 0.5rem 0; }
+.rula-accion { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.5; }
+
+/* Selector método */
+.metodo-quiz { display: flex; flex-direction: column; gap: 1.25rem; }
+.metodo-pregunta {
+  background: var(--blanco); border-radius: var(--radio-grande);
+  box-shadow: var(--sombra); padding: 1.5rem;
+}
+.metodo-pregunta h4 {
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.95rem;
+  margin-bottom: 1rem; color: var(--oscuro);
+}
+.metodo-opciones { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.metodo-opcion {
+  padding: 0.5rem 1rem; border-radius: 8px;
+  border: 2px solid var(--gris-claro); background: var(--blanco);
+  font-size: 0.85rem; cursor: pointer; transition: var(--transicion);
+  font-weight: 500;
+}
+.metodo-opcion:hover { border-color: var(--rojo); color: var(--rojo); }
+.metodo-opcion.sel { border-color: var(--rojo); background: rgba(196,18,48,0.06); color: var(--rojo); font-weight: 700; }
+
+.metodo-resultado {
+  display: none; animation: fadeIn 0.4s ease;
+}
+.metodo-resultado.visible { display: block; }
+.metodo-recomendacion {
+  background: var(--blanco); border-radius: var(--radio-grande);
+  box-shadow: var(--sombra-fuerte); padding: 2rem;
+  border-left: 5px solid var(--rojo);
+}
+.metodo-nombre {
+  font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800;
+  color: var(--rojo); margin-bottom: 0.5rem;
+}
+.metodo-full { font-size: 0.85rem; color: var(--gris-medio); margin-bottom: 1rem; }
+.metodo-desc { color: var(--oscuro); line-height: 1.7; margin-bottom: 1rem; font-size: 0.95rem; }
+.metodo-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.metodo-tag {
+  background: var(--fondo); color: var(--gris-oscuro);
+  font-size: 0.78rem; font-weight: 600; padding: 0.3rem 0.7rem;
+  border-radius: 6px; border: 1px solid var(--gris-claro);
+}
+
+/* ── CASOS ABP ── */
+#casos { background: var(--fondo); }
+
+.casos-selector {
+  display: flex; gap: 1rem; margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.caso-tab {
+  flex: 1; min-width: 180px;
+  background: var(--blanco); border-radius: var(--radio-grande);
+  box-shadow: var(--sombra); padding: 1.5rem;
+  cursor: pointer; border: 3px solid transparent;
+  transition: var(--transicion); text-align: center;
+}
+.caso-tab:hover { transform: translateY(-4px); box-shadow: var(--sombra-fuerte); }
+.caso-tab.active { border-color: var(--rojo); }
+.caso-emoji { font-size: 2.5rem; margin-bottom: 0.5rem; display: block; }
+.caso-tab-nombre { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem; color: var(--oscuro); }
+.caso-tab-sub { font-size: 0.78rem; color: var(--gris-medio); margin-top: 0.2rem; }
+
+.caso-detalle { display: none; }
+.caso-detalle.active { display: block; animation: fadeIn 0.3s ease; }
+
+.caso-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+.caso-card {
+  background: var(--blanco); border-radius: var(--radio-grande);
+  box-shadow: var(--sombra); overflow: hidden;
+}
+.caso-card-header {
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, var(--oscuro), var(--gris-oscuro));
+  color: var(--blanco);
+}
+.caso-card-header h4 {
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.caso-card-body { padding: 1.5rem; }
+
+.peligros-tabla { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.peligros-tabla th {
+  background: var(--fondo); text-align: left;
+  padding: 0.6rem 0.75rem; font-size: 0.75rem;
+  text-transform: uppercase; letter-spacing: 0.5px; color: var(--gris-medio);
+}
+.peligros-tabla td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--gris-claro); }
+.peligros-tabla tr:last-child td { border-bottom: none; }
+
+.nivel-alto { color: var(--rojo); font-weight: 700; }
+.nivel-medio { color: var(--dorado); font-weight: 700; }
+.nivel-bajo { color: var(--verde); font-weight: 700; }
+.nivel-dot-alto::before { content: '●'; color: var(--rojo); margin-right: 4px; }
+.nivel-dot-medio::before { content: '●'; color: var(--dorado); margin-right: 4px; }
+.nivel-dot-bajo::before { content: '●'; color: var(--verde); margin-right: 4px; }
+
+.dme-lista { display: flex; flex-direction: column; gap: 0.6rem; }
+.dme-item {
+  display: flex; gap: 0.75rem; align-items: flex-start;
+  padding: 0.75rem; background: var(--fondo); border-radius: 10px;
+}
+.dme-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+.dme-nombre { font-size: 0.85rem; font-weight: 600; color: var(--oscuro); }
+.dme-region { font-size: 0.75rem; color: var(--gris-medio); }
+
+.controles-lista { display: flex; flex-direction: column; gap: 0.5rem; }
+.control-item {
+  padding: 0.7rem 1rem; border-radius: 10px;
+  font-size: 0.85rem; border-left: 3px solid;
+  line-height: 1.4;
+}
+.control-elim { background: #E8F5EE; border-color: var(--verde); color: #155534; }
+.control-sust { background: #EEF3FC; border-color: var(--azul); color: #1A3A6B; }
+.control-ing { background: #FEF0E6; border-color: var(--naranja); color: #8B3A10; }
+.control-adm { background: #FFF8E6; border-color: var(--dorado); color: #7A5000; }
+.control-epp { background: #F5F0FF; border-color: #6B4AAD; color: #3D2570; }
+.control-tipo {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 0.2rem; opacity: 0.8;
+}
+
+.actividades-conexion {
+  background: linear-gradient(135deg, rgba(196,18,48,0.05), rgba(212,148,26,0.05));
+  border-radius: var(--radio); padding: 1rem; margin-top: 0.5rem;
+  border: 1px solid rgba(196,18,48,0.15);
+}
+.actividades-conexion h5 {
+  font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 700;
+  text-transform: uppercase; color: var(--rojo); margin-bottom: 0.6rem;
+}
+.act-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.act-chip {
+  background: var(--rojo); color: var(--blanco);
+  font-size: 0.75rem; font-weight: 700;
+  padding: 0.25rem 0.6rem; border-radius: 6px;
+}
+
+/* ── NORMATIVA ── */
+#normativa { background: var(--fondo); }
+
+.norma-grupo { margin-bottom: 0.75rem; }
+.norma-header {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--blanco); border-radius: var(--radio-grande);
+  cursor: pointer; box-shadow: var(--sombra);
+  transition: var(--transicion); user-select: none;
+}
+.norma-grupo.open .norma-header { border-radius: var(--radio-grande) var(--radio-grande) 0 0; box-shadow: none; border-bottom: 2px solid var(--gris-claro); }
+.norma-header:hover { background: var(--fondo); }
+.norma-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.norma-title-wrap { flex: 1; }
+.norma-titulo { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--oscuro); }
+.norma-subtitulo { font-size: 0.78rem; color: var(--gris-medio); margin-top: 0.15rem; }
+.norma-pais {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  background: var(--fondo); color: var(--gris-medio);
+  padding: 0.2rem 0.5rem; border-radius: 5px;
+}
+.norma-chevron {
+  color: var(--gris-medio); font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+.norma-grupo.open .norma-chevron { transform: rotate(180deg); }
+
+.norma-body {
+  display: none;
+  background: var(--blanco);
+  border-radius: 0 0 var(--radio-grande) var(--radio-grande);
+  padding: 0 1.5rem 1.5rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+.norma-grupo.open .norma-body { display: block; animation: fadeIn 0.3s ease; }
+
+.norma-articulos { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
+.norma-art {
+  padding: 1rem 1.25rem; border-radius: var(--radio);
+  border-left: 4px solid var(--rojo); background: var(--fondo);
+}
+.norma-art-num { font-size: 0.75rem; font-weight: 700; color: var(--rojo); text-transform: uppercase; margin-bottom: 0.3rem; }
+.norma-art-texto { font-size: 0.88rem; color: var(--oscuro); line-height: 1.6; }
+.norma-art-aplicacion {
+  margin-top: 0.5rem; font-size: 0.78rem; color: var(--gris-medio);
+  padding: 0.4rem 0.75rem; background: var(--blanco); border-radius: 6px;
+  border: 1px solid var(--gris-claro);
+}
+.norma-art-aplicacion strong { color: var(--dorado); }
+
+/* ── PLACEHOLDER IA ── */
+#ia-placeholder {
+  background: linear-gradient(135deg, var(--oscuro) 0%, var(--gris-oscuro) 100%);
+  padding: 5rem 2rem;
+}
+.ia-inner {
+  max-width: 700px; margin: 0 auto; text-align: center;
+}
+.ia-icon {
+  width: 90px; height: 90px; border-radius: 50%;
+  background: rgba(196,18,48,0.2); border: 2px solid rgba(196,18,48,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem; margin: 0 auto 2rem;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.ia-inner h2 {
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 2rem;
+  color: var(--blanco); margin-bottom: 1rem;
+}
+.ia-inner h2 span { color: var(--dorado-claro); }
+.ia-inner p { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.7; max-width: 500px; margin: 0 auto 2rem; }
+.ia-pronto-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(212,148,26,0.15); border: 1px solid rgba(212,148,26,0.4);
+  color: var(--dorado-claro); font-size: 0.85rem; font-weight: 600;
+  padding: 0.5rem 1.25rem; border-radius: 20px;
+}
+.ia-features { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; justify-content: center; }
+.ia-feature {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radio); padding: 1rem 1.5rem; text-align: center; min-width: 140px;
+}
+.ia-feature-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+.ia-feature-text { color: rgba(255,255,255,0.7); font-size: 0.82rem; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--oscuro); color: rgba(255,255,255,0.5);
+  text-align: center; padding: 2rem;
+  font-size: 0.82rem; line-height: 1.7;
+}
+footer strong { color: var(--dorado-claro); }
+
+/* ── UTILS ── */
+.full-width { max-width: none !important; }
+.divider {
+  border: none; border-top: 2px solid var(--gris-claro);
+  margin: 2rem 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .semana-badge { display: none; }
+  .cortes-grid { grid-template-columns: 1fr; }
+  .caso-layout { grid-template-columns: 1fr; }
+  .calc-grid { grid-template-columns: 1fr; }
+  .resultado-grid { grid-template-columns: 1fr; }
+  .factores-detalle { grid-template-columns: repeat(2,1fr); }
+  .nav-links { display: none; }
+  .hero { padding: 3rem 1.5rem 2.5rem; }
+  section { padding: 3rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <a class="nav-brand" href="#inicio">
+    <div class="nav-logo">EC</div>
+    <span class="nav-title">Ergo<span>Campus</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#inicio" class="active">🏠 Inicio</a></li>
+    <li><a href="#calculadoras">🔢 Calculadoras</a></li>
+    <li><a href="#casos">🗂️ Casos ABP</a></li>
+    <li><a href="#normativa">📋 Normativa</a></li>
+    <li><a href="#ia-placeholder">🤖 IA <span class="nav-badge">Próximo</span></a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">🎓 IBERO · SST · II Ciclo 2026</div>
+      <h1>Peligros<br><span>Biomecánicos</span></h1>
+      <p>Recurso docente interactivo del módulo. Consulta casos ABP, usa las calculadoras ergonómicas y explora la normativa colombiana.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">6</div>
+          <div class="hero-stat-label">Semanas</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">3</div>
+          <div class="hero-stat-label">Puestos ABP</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">5</div>
+          <div class="hero-stat-label">Métodos</div>
+        </div>
+      </div>
+    </div>
+    <div class="semana-badge">
+      <div class="semana-badge-num">7</div>
+      <div class="semana-badge-label">Semana actual</div>
+      <div class="semana-badge-sub">Gestión de Peligros</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── INICIO ── -->
+<section id="inicio">
+  <div class="section-header">
+    <div class="section-tag">📅 Línea de tiempo</div>
+    <h2>Progreso del semestre</h2>
+    <p>Docente: Jeison Osvaldo Rincón Salamanca · Sesiones sincrónicas: miércoles 6:00–7:00 p.m. (Teams)</p>
+  </div>
+
+  <div class="timeline-wrapper">
+    <div class="timeline-title">Semanas del módulo — Corte activo: Corte 3</div>
+    <div class="timeline">
+      <div class="timeline-item pasada">
+        <div class="timeline-dot">2</div>
+        <div class="timeline-info">
+          <div class="timeline-semana">Sem. 2</div>
+          <div class="timeline-tema">Sistema hombre–entorno</div>
+          <div class="timeline-actividad">Act. 1</div>
+          <div class="timeline-fecha">Cerró 10 may</div>
+        </div>
+      </div>
+      <div class="timeline-item pasada">
+        <div class="timeline-dot">3</div>
+        <div class="timeline-info">
+          <div class="timeline-semana">Sem. 3</div>
+          <div class="timeline-tema">Postura y movimiento repetitivo</div>
+          <div class="timeline-actividad">Act. 2</div>
+          <div class="timeline-fecha">Cerró 10 may</div>
+        </div>
+      </div>
+      <div class="timeline-item pasada">
+        <div class="timeline-dot">4</div>
+        <div class="timeline-info">
+          <div class="timeline-semana">Sem. 4</div>
+          <div class="timeline-tema">Relación hombre–trabajo</div>
+          <div class="timeline-actividad">Act. 3</div>
+          <div class="timeline-fecha">Cerró 24 may</div>
+        </div>
+      </div>
+      <div class="timeline-item pasada">
+        <div class="timeline-dot">5</div>
+        <div class="timeline-info">
+          <div class="timeline-semana">Sem. 5</div>
+          <div class="timeline-tema">Aplicación de fuerzas</div>
+          <div class="timeline-actividad">Act. 4</div>
+          <div class="timeline-fecha">Cerró 24 may</div>
+        </div>
+      </div>
+      <div class="timeline-item pasada">
+        <div class="timeline-dot">6</div>
+        <div class="timeline-info">
+          <div class="timeline-semana">Sem. 6</div>
+          <div class="timeline-tema">Características y DME</div>
+          <div class="timeline-actividad">Act. 5</div>
+          <div class="timeline-fecha">Cierra 7 jun</div>
+        </div>
+      </div>
+      <div class="timeline-item actual">
+        <div class="timeline-dot">7</div>
+        <div class="timeline-info">
+          <div class="timeline-semana">Sem. 7 ← Hoy</div>
+          <div class="timeline-tema">Gestión de peligros</div>
+          <div class="timeline-actividad">Act. 6</div>
+          <div class="timeline-fecha">Cierra 7 jun</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header" style="margin-top:2rem">
+    <div class="section-tag">📊 Evaluación</div>
+    <h2>Cortes académicos</h2>
+  </div>
+  <div class="cortes-grid">
+    <div class="corte-card activo">
+      <div class="corte-num">Corte 1 — Completado</div>
+      <div class="corte-pct">30<span>%</span></div>
+      <div class="corte-acts">
+        <div class="corte-act-item"><div class="corte-act-dot"></div>Actividad 1 — Sistema hombre-entorno (Video-cuestionario)</div>
+        <div class="corte-act-item"><div class="corte-act-dot"></div>Actividad 2 — Postura y movimiento repetitivo (Tarea)</div>
+      </div>
+      <div class="corte-fecha">📅 Cerrado: 10 de mayo de 2026</div>
+    </div>
+    <div class="corte-card proximo">
+      <div class="corte-num">Corte 2 — Completado</div>
+      <div class="corte-pct">30<span>%</span></div>
+      <div class="corte-acts">
+        <div class="corte-act-item"><div class="corte-act-dot"></div>Actividad 3 — Relación hombre–trabajo (Cuestionario)</div>
+        <div class="corte-act-item"><div class="corte-act-dot"></div>Actividad 4 — Aplicación de fuerza (Tarea)</div>
+      </div>
+      <div class="corte-fecha">📅 Cerrado: 24 de mayo de 2026</div>
+    </div>
+    <div class="corte-card futuro">
+      <div class="corte-num">Corte 3 — ⚡ En curso</div>
+      <div class="corte-pct">40<span>%</span></div>
+      <div class="corte-acts">
+        <div class="corte-act-item"><div class="corte-act-dot"></div>Actividad 5 — Características y DME (Presentación/cuestionario)</div>
+        <div class="corte-act-item"><div class="corte-act-dot"></div>Actividad 6 — Gestión de peligros biomecánicos (Tarea)</div>
+        <div class="corte-act-item"><div class="corte-act-dot"></div>Test de seguimiento y autoevaluación</div>
+      </div>
+      <div class="corte-fecha">📅 Cierre: 7 de junio de 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CALCULADORAS ── -->
+<section id="calculadoras">
+  <div class="section-header">
+    <div class="section-tag">🔢 Herramientas</div>
+    <h2>Calculadoras ergonómicas</h2>
+    <p>Practica los métodos de evaluación directamente en el navegador. Útiles para las Actividades 2 y 4.</p>
+  </div>
+
+  <div class="calc-tabs">
+    <button class="calc-tab active" onclick="showCalc('niosh',this)">Ecuación NIOSH</button>
+    <button class="calc-tab" onclick="showCalc('rula',this)">Guía RULA</button>
+    <button class="calc-tab" onclick="showCalc('selector',this)">¿Qué método uso?</button>
+  </div>
+
+  <!-- NIOSH -->
+  <div class="calc-panel active" id="calc-niosh">
+    <div class="calc-card">
+      <div class="calc-header">
+        <h3>Ecuación NIOSH Revisada (1994)</h3>
+        <p>Calcula el Peso Límite Recomendado (RWL) y el Índice de Levantamiento (IL) para tareas de levantamiento manual de cargas</p>
+      </div>
+      <div class="calc-body">
+        <div class="calc-formula">RWL = 23 × HM × VM × DM × AM × FM × CM</div>
+        <div class="calc-grid">
+          <div class="calc-field">
+            <label class="calc-label">H — Distancia horizontal <span>(cm, desde el cuerpo)</span></label>
+            <input class="calc-input" type="number" id="n-h" placeholder="Ej: 35" min="25" max="63" value="">
+          </div>
+          <div class="calc-field">
+            <label class="calc-label">V — Altura inicial <span>(cm, desde el suelo)</span></label>
+            <input class="calc-input" type="number" id="n-v" placeholder="Ej: 75" min="0" max="175" value="">
+          </div>
+          <div class="calc-field">
+            <label class="calc-label">D — Desplazamiento vertical <span>(cm)</span></label>
+            <input class="calc-input" type="number" id="n-d" placeholder="Ej: 50" min="25" max="175" value="">
+          </div>
+          <div class="calc-field">
+            <label class="calc-label">A — Ángulo de asimetría <span>(°, torsión del tronco)</span></label>
+            <input class="calc-input" type="number" id="n-a" placeholder="Ej: 0" min="0" max="135" value="">
+          </div>
+          <div class="calc-field">
+            <label class="calc-label">F — Frecuencia <span>(levantamientos/minuto)</span></label>
+            <select class="calc-select" id="n-f">
+              <option value="1.00">≤ 0.2 /min (ocasional)</option>
+              <option value="0.97">0.5 /min</option>
+              <option value="0.94">1 /min</option>
+              <option value="0.91">2 /min</option>
+              <option value="0.88">3 /min</option>
+              <option value="0.84">4 /min</option>
+              <option value="0.80">5 /min</option>
+              <option value="0.75">6 /min</option>
+              <option value="0.70">7 /min</option>
+              <option value="0.60">8 /min</option>
+              <option value="0.52">9 /min</option>
+              <option value="0.45">10 /min</option>
+              <option value="0.37">12 /min</option>
+              <option value="0.28">15 /min</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label class="calc-label">C — Calidad del agarre</label>
+            <select class="calc-select" id="n-c">
+              <option value="1.00">Bueno (asas adecuadas)</option>
+              <option value="0.95">Regular (asas aceptables)</option>
+              <option value="0.90">Malo (sin asas o irregulares)</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label class="calc-label">Peso real de la carga <span>(kg)</span></label>
+            <input class="calc-input" type="number" id="n-peso" placeholder="Ej: 18" min="0" max="100" value="">
+          </div>
+        </div>
+        <button class="calc-btn" onclick="calcNiosh()">⚡ Calcular RWL e Índice de Levantamiento</button>
+        <div class="calc-resultado" id="res-niosh">
+          <div class="resultado-grid">
+            <div class="resultado-item">
+              <div class="resultado-val" id="res-rwl">—</div>
+              <div class="resultado-lbl">RWL (kg)</div>
+            </div>
+            <div class="resultado-item">
+              <div class="resultado-val" id="res-il">—</div>
+              <div class="resultado-lbl">Índice de Levantamiento</div>
+            </div>
+          </div>
+          <div style="margin:1rem 0;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+            <span class="riesgo-badge" id="res-riesgo"></span>
+            <span id="res-interpretacion" style="font-size:0.9rem;color:var(--gris-medio)"></span>
+          </div>
+          <div class="factores-detalle" id="res-factores"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RULA -->
+  <div class="calc-panel" id="calc-rula">
+    <div style="margin-bottom:1rem;background:var(--blanco);border-radius:var(--radio-grande);padding:1.25rem 1.5rem;box-shadow:var(--sombra);border-left:5px solid var(--rojo)">
+      <p style="font-size:0.88rem;color:var(--gris-medio)"><strong style="color:var(--rojo)">RULA</strong> — Rapid Upper Limb Assessment (McAtamney y Corlett, 1993). Evalúa el riesgo en el miembro superior. Puntaje final 1–7. Usa esta guía para orientarte; para evaluaciones formales complementa con el instrumento completo.</p>
+    </div>
+
+    <div class="rula-step activo" id="rula-s1">
+      <div class="rula-step-header" onclick="toggleRula(1)">
+        <div class="rula-step-num">1</div>
+        <div>
+          <div class="rula-step-titulo">Brazo (miembro superior)</div>
+          <div class="rula-step-subtitulo">Ángulo de flexión del hombro</div>
+        </div>
+      </div>
+      <div class="rula-step-body">
+        <div class="rula-opciones" id="rula-op1">
+          <label class="rula-opcion"><input type="radio" name="r1" value="1"> <span class="rula-opcion-texto">Extensión >20° o flexión 0–20°</span> <span class="rula-opcion-puntaje">1</span></label>
+          <label class="rula-opcion"><input type="radio" name="r1" value="2"> <span class="rula-opcion-texto">Flexión 20–45° o extensión >20°</span> <span class="rula-opcion-puntaje">2</span></label>
+          <label class="rula-opcion"><input type="radio" name="r1" value="3"> <span class="rula-opcion-texto">Flexión 45–90°</span> <span class="rula-opcion-puntaje">3</span></label>
+          <label class="rula-opcion"><input type="radio" name="r1" value="4"> <span class="rula-opcion-texto">Flexión >90°</span> <span class="rula-opcion-puntaje">4</span></label>
+        </div>
+        <div class="rula-nav"><button class="rula-btn-next" onclick="nextRula(1)">Siguiente →</button></div>
+      </div>
+    </div>
+
+    <div class="rula-step" id="rula-s2">
+      <div class="rula-step-header" onclick="toggleRula(2)">
+        <div class="rula-step-num">2</div>
+        <div>
+          <div class="rula-step-titulo">Antebrazo</div>
+          <div class="rula-step-subtitulo">Ángulo de flexión del codo</div>
+        </div>
+      </div>
+      <div class="rula-step-body">
+        <div class="rula-opciones">
+          <label class="rula-opcion"><input type="radio" name="r2" value="1"> <span class="rula-opcion-texto">Flexión 60–100°</span> <span class="rula-opcion-puntaje">1</span></label>
+          <label class="rula-opcion"><input type="radio" name="r2" value="2"> <span class="rula-opcion-texto">Flexión <60° o >100°</span> <span class="rula-opcion-puntaje">2</span></label>
+        </div>
+        <div class="rula-nav">
+          <button class="rula-btn-prev" onclick="prevRula(2)">← Anterior</button>
+          <button class="rula-btn-next" onclick="nextRula(2)">Siguiente →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rula-step" id="rula-s3">
+      <div class="rula-step-header" onclick="toggleRula(3)">
+        <div class="rula-step-num">3</div>
+        <div>
+          <div class="rula-step-titulo">Muñeca</div>
+          <div class="rula-step-subtitulo">Posición de la muñeca</div>
+        </div>
+      </div>
+      <div class="rula-step-body">
+        <div class="rula-opciones">
+          <label class="rula-opcion"><input type="radio" name="r3" value="1"> <span class="rula-opcion-texto">Posición neutra (0°)</span> <span class="rula-opcion-puntaje">1</span></label>
+          <label class="rula-opcion"><input type="radio" name="r3" value="2"> <span class="rula-opcion-texto">Flexión/extensión 0–15°</span> <span class="rula-opcion-puntaje">2</span></label>
+          <label class="rula-opcion"><input type="radio" name="r3" value="3"> <span class="rula-opcion-texto">Flexión/extensión >15°</span> <span class="rula-opcion-puntaje">3</span></label>
+          <label class="rula-opcion"><input type="radio" name="r3" value="4"> <span class="rula-opcion-texto">Desviación cubital/radial + flexión</span> <span class="rula-opcion-puntaje">4</span></label>
+        </div>
+        <div class="rula-nav">
+          <button class="rula-btn-prev" onclick="prevRula(3)">← Anterior</button>
+          <button class="rula-btn-next" onclick="nextRula(3)">Siguiente →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rula-step" id="rula-s4">
+      <div class="rula-step-header" onclick="toggleRula(4)">
+        <div class="rula-step-num">4</div>
+        <div>
+          <div class="rula-step-titulo">Cuello</div>
+          <div class="rula-step-subtitulo">Posición del cuello</div>
+        </div>
+      </div>
+      <div class="rula-step-body">
+        <div class="rula-opciones">
+          <label class="rula-opcion"><input type="radio" name="r4" value="1"> <span class="rula-opcion-texto">Flexión 0–10°</span> <span class="rula-opcion-puntaje">1</span></label>
+          <label class="rula-opcion"><input type="radio" name="r4" value="2"> <span class="rula-opcion-texto">Flexión 10–20°</span> <span class="rula-opcion-puntaje">2</span></label>
+          <label class="rula-opcion"><input type="radio" name="r4" value="3"> <span class="rula-opcion-texto">Flexión >20°</span> <span class="rula-opcion-puntaje">3</span></label>
+          <label class="rula-opcion"><input type="radio" name="r4" value="4"> <span class="rula-opcion-texto">Extensión (cabeza hacia atrás)</span> <span class="rula-opcion-puntaje">4</span></label>
+        </div>
+        <div class="rula-nav">
+          <button class="rula-btn-prev" onclick="prevRula(4)">← Anterior</button>
+          <button class="rula-btn-next" onclick="nextRula(4)">Siguiente →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rula-step" id="rula-s5">
+      <div class="rula-step-header" onclick="toggleRula(5)">
+        <div class="rula-step-num">5</div>
+        <div>
+          <div class="rula-step-titulo">Tronco</div>
+          <div class="rula-step-subtitulo">Posición del tronco</div>
+        </div>
+      </div>
+      <div class="rula-step-body">
+        <div class="rula-opciones">
+          <label class="rula-opcion"><input type="radio" name="r5" value="1"> <span class="rula-opcion-texto">Erguido (sentado o de pie)</span> <span class="rula-opcion-puntaje">1</span></label>
+          <label class="rula-opcion"><input type="radio" name="r5" value="2"> <span class="rula-opcion-texto">Flexión 0–20°</span> <span class="rula-opcion-puntaje">2</span></label>
+          <label class="rula-opcion"><input type="radio" name="r5" value="3"> <span class="rula-opcion-texto">Flexión 20–60°</span> <span class="rula-opcion-puntaje">3</span></label>
+          <label class="rula-opcion"><input type="radio" name="r5" value="4"> <span class="rula-opcion-texto">Flexión >60° o extensión marcada</span> <span class="rula-opcion-puntaje">4</span></label>
+        </div>
+        <div class="rula-nav">
+          <button class="rula-btn-prev" onclick="prevRula(5)">← Anterior</button>
+          <button class="rula-btn-next" onclick="calcRula()">Ver resultado ✓</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rula-resultado-final" id="rula-resultado">
+      <div style="display:flex;align-items:flex-start;gap:2rem;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.3rem;">Puntaje RULA estimado</div>
+          <div class="rula-score-big" id="rula-score-val">—</div>
+        </div>
+        <div style="flex:1;min-width:220px;">
+          <div class="rula-nivel" id="rula-nivel-texto">—</div>
+          <div class="rula-accion" id="rula-accion-texto">—</div>
+        </div>
+      </div>
+      <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1)">
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.4)">⚠️ Esta es una estimación orientativa. Para evaluaciones formales complementa con la planilla RULA completa y la Tabla C de cruce de puntajes.</p>
+      </div>
+      <button style="margin-top:1rem;padding:0.6rem 1.2rem;border-radius:8px;border:1px solid rgba(255,255,255,0.3);background:transparent;color:rgba(255,255,255,0.8);cursor:pointer;font-size:0.85rem;" onclick="resetRula()">↺ Nueva evaluación</button>
+    </div>
+  </div>
+
+  <!-- SELECTOR MÉTODO -->
+  <div class="calc-panel" id="calc-selector">
+    <div class="metodo-quiz">
+      <div class="metodo-pregunta">
+        <h4>1. ¿Cuál es la postura predominante de trabajo?</h4>
+        <div class="metodo-opciones">
+          <button class="metodo-opcion" onclick="setMetodo('postura','pie')">De pie</button>
+          <button class="metodo-opcion" onclick="setMetodo('postura','sentado')">Sentado</button>
+          <button class="metodo-opcion" onclick="setMetodo('postura','ambas')">Mixta</button>
+          <button class="metodo-opcion" onclick="setMetodo('postura','agachado')">Agachado/arrodillado</button>
+        </div>
+      </div>
+      <div class="metodo-pregunta">
+        <h4>2. ¿Hay levantamiento o transporte de cargas?</h4>
+        <div class="metodo-opciones">
+          <button class="metodo-opcion" onclick="setMetodo('carga','si_pesada')">Sí, cargas pesadas (&gt;5 kg)</button>
+          <button class="metodo-opcion" onclick="setMetodo('carga','si_liviana')">Sí, cargas ligeras</button>
+          <button class="metodo-opcion" onclick="setMetodo('carga','empuje')">Empuje o tracción</button>
+          <button class="metodo-opcion" onclick="setMetodo('carga','no')">No hay MMC</button>
+        </div>
+      </div>
+      <div class="metodo-pregunta">
+        <h4>3. ¿Predominan los movimientos repetitivos del brazo/mano?</h4>
+        <div class="metodo-opciones">
+          <button class="metodo-opcion" onclick="setMetodo('repetitivo','si_alta')">Sí, alta frecuencia (&lt;30 seg/ciclo)</button>
+          <button class="metodo-opcion" onclick="setMetodo('repetitivo','si_media')">Sí, frecuencia media</button>
+          <button class="metodo-opcion" onclick="setMetodo('repetitivo','no')">No predominantemente</button>
+        </div>
+      </div>
+      <div class="metodo-pregunta">
+        <h4>4. ¿Qué parte del cuerpo presenta mayor riesgo?</h4>
+        <div class="metodo-opciones">
+          <button class="metodo-opcion" onclick="setMetodo('segmento','superior')">Miembro superior (brazo, muñeca)</button>
+          <button class="metodo-opcion" onclick="setMetodo('segmento','cuerpo_completo')">Cuerpo completo</button>
+          <button class="metodo-opcion" onclick="setMetodo('segmento','lumbar')">Columna / zona lumbar</button>
+          <button class="metodo-opcion" onclick="setMetodo('segmento','no_claro')">No está claro aún</button>
+        </div>
+      </div>
+      <button class="calc-btn" onclick="evaluarMetodo()">🎯 Ver método recomendado</button>
+      <div class="metodo-resultado" id="metodo-resultado">
+        <div class="metodo-recomendacion">
+          <div class="metodo-nombre" id="met-nombre">—</div>
+          <div class="metodo-full" id="met-full">—</div>
+          <div class="metodo-desc" id="met-desc">—</div>
+          <div class="metodo-tags" id="met-tags"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CASOS ABP ── -->
+<section id="casos">
+  <div class="section-header">
+    <div class="section-tag">🗂️ Proyecto ABP</div>
+    <h2>Casos de estudio</h2>
+    <p>Los tres puestos de trabajo del semestre. Explora peligros, DME y controles para tu caso asignado.</p>
+  </div>
+
+  <div class="casos-selector">
+    <div class="caso-tab active" onclick="showCaso('floricultor',this)">
+      <span class="caso-emoji">🌹</span>
+      <div class="caso-tab-nombre">Floricultor</div>
+      <div class="caso-tab-sub">Recolección de rosas</div>
+    </div>
+    <div class="caso-tab" onclick="showCaso('empacador',this)">
+      <span class="caso-emoji">💄</span>
+      <div class="caso-tab-nombre">Empacador</div>
+      <div class="caso-tab-sub">Labiales / cosmética</div>
+    </div>
+    <div class="caso-tab" onclick="showCaso('cajero',this)">
+      <span class="caso-emoji">🏦</span>
+      <div class="caso-tab-nombre">Cajero</div>
+      <div class="caso-tab-sub">Entidad financiera</div>
+    </div>
+  </div>
+
+  <!-- FLORICULTOR -->
+  <div class="caso-detalle active" id="caso-floricultor">
+    <div class="caso-layout">
+      <div>
+        <div class="caso-card" style="margin-bottom:1.5rem">
+          <div class="caso-card-header">
+            <h4>🌹 Descripción del puesto</h4>
+          </div>
+          <div class="caso-card-body">
+            <p style="font-size:0.9rem;line-height:1.7;color:var(--gris-medio)">El floricultor realiza la recolección manual de rosas en cultivos bajo invernadero. La jornada es de 8–10 horas. Las principales actividades incluyen corte con tijeras de poda, transporte de canastillas (8–12 kg), clasificación y desespinado, todo con posturas agachadas, inclinadas y con torsiones frecuentes del tronco.</p>
+            <div class="actividades-conexion" style="margin-top:1rem">
+              <h5>Actividades evaluadas asociadas</h5>
+              <div class="act-chips">
+                <span class="act-chip">Act. 2 — Posturas</span>
+                <span class="act-chip">Act. 4 — Fuerzas</span>
+                <span class="act-chip">Act. 5 — DME</span>
+                <span class="act-chip">Act. 6 — Gestión</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="caso-card">
+          <div class="caso-card-header"><h4>⚠️ Mapa de peligros biomecánicos</h4></div>
+          <div class="caso-card-body">
+            <table class="peligros-tabla">
+              <thead><tr><th>Peligro</th><th>Presente</th><th>Nivel</th></tr></thead>
+              <tbody>
+                <tr><td>Postura forzada (flexión tronco >60°)</td><td>✅</td><td class="nivel-alto nivel-dot-alto">Alto</td></tr>
+                <tr><td>Movimiento repetitivo (corte con tijera)</td><td>✅</td><td class="nivel-alto nivel-dot-alto">Alto</td></tr>
+                <tr><td>Manipulación manual de cargas (canastillas)</td><td>✅</td><td class="nivel-alto nivel-dot-alto">Alto</td></tr>
+                <tr><td>Postura antigravitacional (brazos sobre hombro)</td><td>✅</td><td class="nivel-medio nivel-dot-medio">Medio</td></tr>
+                <tr><td>Carga estática (sostenida en cuclillas)</td><td>✅</td><td class="nivel-medio nivel-dot-medio">Medio</td></tr>
+                <tr><td>Vibración (herramientas)</td><td>⚠️</td><td class="nivel-bajo nivel-dot-bajo">Bajo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="caso-card" style="margin-bottom:1.5rem">
+          <div class="caso-card-header"><h4>🦴 DME más frecuentes</h4></div>
+          <div class="caso-card-body">
+            <div class="dme-lista">
+              <div class="dme-item"><span class="dme-icon">💢</span><div><div class="dme-nombre">Lumbalgia mecánica / Hernia discal L4-L5</div><div class="dme-region">Flexión repetida del tronco + MMC</div></div></div>
+              <div class="dme-item"><span class="dme-icon">🦾</span><div><div class="dme-nombre">Síndrome del manguito rotador</div><div class="dme-region">Brazos en elevación durante el corte</div></div></div>
+              <div class="dme-item"><span class="dme-icon">✋</span><div><div class="dme-nombre">Tenosinovitis De Quervain</div><div class="dme-region">Movimiento repetitivo del pulgar con tijeras</div></div></div>
+              <div class="dme-item"><span class="dme-icon">🦵</span><div><div class="dme-nombre">Fascitis plantar / Síndrome patelofemoral</div><div class="dme-region">Jornada prolongada de pie en suelo irregular</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="caso-card">
+          <div class="caso-card-header"><h4>🛡️ Jerarquía de controles</h4></div>
+          <div class="caso-card-body">
+            <div class="controles-lista">
+              <div class="control-item control-ing"><div class="control-tipo">Ingeniería</div>Mesas de clasificación regulables en altura (70–110 cm) para evitar flexión de tronco</div>
+              <div class="control-item control-ing"><div class="control-tipo">Ingeniería</div>Carros de transporte para canastillas — elimina MMC de 8–12 kg</div>
+              <div class="control-item control-ing"><div class="control-tipo">Ingeniería</div>Tijeras con mango ergonómico antivibración y resorte de apertura automática</div>
+              <div class="control-item control-adm"><div class="control-tipo">Administrativo</div>Rotación de tareas cada 2 horas (corte → clasificación → transporte)</div>
+              <div class="control-item control-adm"><div class="control-tipo">Administrativo</div>Pausas activas de 10 min cada 2 h con énfasis en extensión lumbar y estiramiento de miembros superiores</div>
+              <div class="control-item control-adm"><div class="control-tipo">Administrativo</div>Vigilancia epidemiológica: encuesta de síntomas musculoesqueléticos semestral (diagrama de Kuorinka)</div>
+              <div class="control-item control-epp"><div class="control-tipo">EPP</div>Rodilleras ergonómicas, guantes antivibración, calzado con soporte plantar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMPACADOR -->
+  <div class="caso-detalle" id="caso-empacador">
+    <div class="caso-layout">
+      <div>
+        <div class="caso-card" style="margin-bottom:1.5rem">
+          <div class="caso-card-header"><h4>💄 Descripción del puesto</h4></div>
+          <div class="caso-card-body">
+            <p style="font-size:0.9rem;line-height:1.7;color:var(--gris-medio)">El empacador de labiales trabaja en línea de producción cosmética. La jornada es de 8 horas. Realiza inspección visual del producto, inserción del labial en el estuche, sellado y empaque en cajas. El ciclo de tarea dura 15–20 segundos, con movimientos repetitivos altamente frecuentes de los dedos, muñeca y antebrazo, en postura sedente o bípeda con el tronco ligeramente inclinado.</p>
+            <div class="actividades-conexion" style="margin-top:1rem">
+              <h5>Actividades evaluadas asociadas</h5>
+              <div class="act-chips">
+                <span class="act-chip">Act. 2 — Posturas</span>
+                <span class="act-chip">Act. 4 — Fuerzas</span>
+                <span class="act-chip">Act. 5 — DME</span>
+                <span class="act-chip">Act. 6 — Gestión</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="caso-card">
+          <div class="caso-card-header"><h4>⚠️ Mapa de peligros biomecánicos</h4></div>
+          <div class="caso-card-body">
+            <table class="peligros-tabla">
+              <thead><tr><th>Peligro</th><th>Presente</th><th>Nivel</th></tr></thead>
+              <tbody>
+                <tr><td>Movimiento repetitivo miembro superior (&lt;20 s/ciclo)</td><td>✅</td><td class="nivel-alto nivel-dot-alto">Alto</td></tr>
+                <tr><td>Postura sedente sostenida (&gt;75% jornada)</td><td>✅</td><td class="nivel-alto nivel-dot-alto">Alto</td></tr>
+                <tr><td>Postura de muñeca en desviación (pinza fina)</td><td>✅</td><td class="nivel-alto nivel-dot-alto">Alto</td></tr>
+                <tr><td>Aplicación de fuerza en dedos (agarre de precisión)</td><td>✅</td><td class="nivel-medio nivel-dot-medio">Medio</td></tr>
+                <tr><td>Postura de cuello forzada (inspección visual cercana)</td><td>✅</td><td class="nivel-medio nivel-dot-medio">Medio</td></tr>
+                <tr><td>Contacto estrés (superficies duras)</td><td>✅</td><td class="nivel-bajo nivel-dot-bajo">Bajo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="caso-card" style="margin-bottom:1.5rem">
+          <div class="caso-card-header"><h4>🦴 DME más frecuentes</h4></div>
+          <div class="caso-card-body">
+            <div class="dme-lista">
+              <div class="dme-item"><span class="dme-icon">✋</span><div><div class="dme-nombre">Síndrome del túnel del carpo</div><div class="dme-region">Compresión n. mediano — flexo-extensión repetida de muñeca</div></div></div>
+              <div class="dme-item"><span class="dme-icon">👍</span><div><div class="dme-nombre">Tenosinovitis De Quervain</div><div class="dme-region">Movimiento repetitivo del pulgar en pinza de precisión</div></div></div>
+              <div class="dme-item"><span class="dme-icon">🦾</span><div><div class="dme-nombre">Epicondilitis lateral</div><div class="dme-region">Sobrecarga de extensores del antebrazo</div></div></div>
+              <div class="dme-item"><span class="dme-icon">💢</span><div><div class="dme-nombre">Cervicalgia postural</div><div class="dme-region">Cuello en flexión sostenida durante inspección visual</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="caso-card">
+          <div class="caso-card-header"><h4>🛡️ Jerarquía de controles</h4></div>
+          <div class="caso-card-body">
+            <div class="controles-lista">
+              <div class="control-item control-elim"><div class="control-tipo">Eliminación</div>Automatizar sellado del estuche con prensa neumática — elimina la fuerza de pinza repetitiva</div>
+              <div class="control-item control-ing"><div class="control-tipo">Ingeniería</div>Superficie de trabajo regulable en altura — mantiene codos a 90° y muñecas en posición neutra</div>
+              <div class="control-item control-ing"><div class="control-tipo">Ingeniería</div>Soporte de muñeca ergonómico en el puesto para reducir desviaciones</div>
+              <div class="control-item control-adm"><div class="control-tipo">Administrativo</div>Rotación entre estaciones cada 90 minutos (inspección → empaque → sellado → paletizado)</div>
+              <div class="control-item control-adm"><div class="control-tipo">Administrativo</div>Pausas activas de 5 min cada hora con ejercicios específicos de dedos y muñeca (flexiones, aperturas)</div>
+              <div class="control-item control-adm"><div class="control-tipo">Administrativo</div>Examen médico ocupacional con énfasis osteomuscular en miembro superior (Phalen, Tinel)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAJERO -->
+  <div class="caso-detalle" id="caso-cajero">
+    <div class="caso-layout">
+      <div>
+        <div class="caso-card" style="margin-bottom:1.5rem">
+          <div class="caso-card-header"><h4>🏦 Descripción del puesto</h4></div>
+          <div class="caso-card-body">
+            <p style="font-size:0.9rem;line-height:1.7;color:var(--gris-medio)">El cajero de entidad financiera realiza atención al cliente en ventanilla durante 8 horas. Sus actividades incluyen digitación en teclado y teclado numérico, manejo de efectivo (conteo, clasificación), uso de pantalla de computador, impresión y sellado de documentos. Postura predominante sedente, con eventualidad de postura bípeda en cajeros de pie.</p>
+            <div class="actividades-conexion" style="margin-top:1rem">
+              <h5>Actividades evaluadas asociadas</h5>
+              <div class="act-chips">
+                <span class="act-chip">Act. 2 — Posturas</span>
+                <span class="act-chip">Act. 4 — Fuerzas</span>
+                <span class="act-chip">Act. 5 — DME</span>
+                <span class="act-chip">Act. 6 — Gestión</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="caso-card">
+          <div class="caso-card-header"><h4>⚠️ Mapa de peligros biomecánicos</h4></div>
+          <div class="caso-card-body">
+            <table class="peligros-tabla">
+              <thead><tr><th>Peligro</th><th>Presente</th><th>Nivel</th></tr></thead>
+              <tbody>
+                <tr><td>Postura sedente sostenida (>75% jornada)</td><td>✅</td><td class="nivel-alto nivel-dot-alto">Alto</td></tr>
+                <tr><td>Movimiento repetitivo de dedos (digitación)</td><td>✅</td><td class="nivel-alto nivel-dot-alto">Alto</td></tr>
+                <tr><td>Postura de cuello en flexión (pantalla baja)</td><td>✅</td><td class="nivel-medio nivel-dot-medio">Medio</td></tr>
+                <tr><td>Postura de muñeca en extensión (teclado sin soporte)</td><td>✅</td><td class="nivel-medio nivel-dot-medio">Medio</td></tr>
+                <tr><td>Tronco en flexión anterior (silla sin respaldo)</td><td>✅</td><td class="nivel-medio nivel-dot-medio">Medio</td></tr>
+                <tr><td>Esfuerzo visual sostenido (pantalla)</td><td>✅</td><td class="nivel-bajo nivel-dot-bajo">Bajo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="caso-card" style="margin-bottom:1.5rem">
+          <div class="caso-card-header"><h4>🦴 DME más frecuentes</h4></div>
+          <div class="caso-card-body">
+            <div class="dme-lista">
+              <div class="dme-item"><span class="dme-icon">💢</span><div><div class="dme-nombre">Cervicalgia postural</div><div class="dme-region">Cuello en flexión sostenida frente a pantalla</div></div></div>
+              <div class="dme-item"><span class="dme-icon">✋</span><div><div class="dme-nombre">Síndrome del túnel del carpo</div><div class="dme-region">Digitación repetitiva con muñeca en extensión</div></div></div>
+              <div class="dme-item"><span class="dme-icon">🦾</span><div><div class="dme-nombre">Síndrome del túnel cubital</div><div class="dme-region">Codo flexionado sobre superficie dura</div></div></div>
+              <div class="dme-item"><span class="dme-icon">🪑</span><div><div class="dme-nombre">Lumbalgia discogénica L4-L5</div><div class="dme-region">Postura sedente sostenida sin soporte lumbar adecuado</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="caso-card">
+          <div class="caso-card-header"><h4>🛡️ Jerarquía de controles</h4></div>
+          <div class="caso-card-body">
+            <div class="controles-lista">
+              <div class="control-item control-ing"><div class="control-tipo">Ingeniería</div>Silla ergonómica regulable con apoyo lumbar ajustable y reposapiés si aplica</div>
+              <div class="control-item control-ing"><div class="control-tipo">Ingeniería</div>Monitor a nivel de ojos (parte superior de pantalla ±5° desde la horizontal) a 50–70 cm de distancia</div>
+              <div class="control-item control-ing"><div class="control-tipo">Ingeniería</div>Reposamuñecas frente al teclado para mantener muñeca en posición neutra</div>
+              <div class="control-item control-adm"><div class="control-tipo">Administrativo</div>Regla 20-20-20: cada 20 min, mirar 20 segundos a 20 pies (6 m) de distancia — reduce fatiga visual y postural</div>
+              <div class="control-item control-adm"><div class="control-tipo">Administrativo</div>Pausas activas de 10 min cada 2 h con ejercicios de movilidad cervical, extensión de muñeca y estiramiento lumbar</div>
+              <div class="control-item control-adm"><div class="control-tipo">Administrativo</div>Lista de verificación ergonómica de puesto de trabajo (checklist ROSA o similar para oficinas)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NORMATIVA ── -->
+<section id="normativa">
+  <div class="section-header">
+    <div class="section-tag">📋 Marco legal</div>
+    <h2>Normativa colombiana e internacional</h2>
+    <p>Legislación y estándares aplicados al módulo. Esencial para la Actividad 6.</p>
+  </div>
+
+  <div class="norma-grupo">
+    <div class="norma-header" onclick="toggleNorma(this)">
+      <div class="norma-icon" style="background:#FEF0E6">📜</div>
+      <div class="norma-title-wrap">
+        <div class="norma-titulo">Decreto 1072 de 2015</div>
+        <div class="norma-subtitulo">Decreto Único Reglamentario del Sector Trabajo — SG-SST</div>
+      </div>
+      <span class="norma-pais">🇨🇴 Colombia</span>
+      <span class="norma-chevron">▼</span>
+    </div>
+    <div class="norma-body">
+      <div class="norma-articulos">
+        <div class="norma-art">
+          <div class="norma-art-num">Libro 2, Parte 2, Título 4, Cap. 6</div>
+          <div class="norma-art-texto">Establece el Sistema de Gestión de Seguridad y Salud en el Trabajo (SG-SST). Define las obligaciones del empleador, los derechos de los trabajadores y la estructura del sistema.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Marco general para entender la gestión de peligros biomecánicos dentro del SG-SST</div>
+        </div>
+        <div class="norma-art">
+          <div class="norma-art-num">Art. 2.2.4.6.21 — Indicadores de estructura</div>
+          <div class="norma-art-texto">Miden la disponibilidad y acceso a recursos, políticas y organización para gestionar la SST. Ejemplo: % del presupuesto asignado al programa de vigilancia osteomuscular.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Actividad 6 — construcción de ficha del indicador de estructura del programa de gestión</div>
+        </div>
+        <div class="norma-art">
+          <div class="norma-art-num">Art. 2.2.4.6.22 — Indicadores de proceso</div>
+          <div class="norma-art-texto">Miden el grado de desarrollo e implementación del sistema. Ejemplo: % de puestos evaluados con metodología ergonómica validada respecto al total de puestos críticos.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Actividad 6 — indicador de proceso del programa de gestión biomecánico</div>
+        </div>
+        <div class="norma-art">
+          <div class="norma-art-num">Art. 2.2.4.6.23 — Indicadores de resultado</div>
+          <div class="norma-art-texto">Miden los cambios alcanzados. Ejemplo: tasa de incidencia de DME por 100 trabajadores/año — debe disminuir con las intervenciones.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Actividad 6 — indicador de resultado del programa de gestión biomecánico</div>
+        </div>
+        <div class="norma-art">
+          <div class="norma-art-num">Art. 2.2.4.6.24 — Ficha del indicador (mínimos)</div>
+          <div class="norma-art-texto">La ficha debe contener: definición, interpretación, límite o umbral (meta), método de cálculo, fuente de información, periodicidad del reporte y personas que deben conocer el resultado.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Actividad 6 — formato obligatorio para las 3 fichas de indicadores (estructura, proceso, resultado)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="norma-grupo">
+    <div class="norma-header" onclick="toggleNorma(this)">
+      <div class="norma-icon" style="background:#E8EFF8">⚖️</div>
+      <div class="norma-title-wrap">
+        <div class="norma-titulo">Resolución 0312 de 2019</div>
+        <div class="norma-subtitulo">Estándares Mínimos del SG-SST</div>
+      </div>
+      <span class="norma-pais">🇨🇴 Colombia</span>
+      <span class="norma-chevron">▼</span>
+    </div>
+    <div class="norma-body">
+      <div class="norma-articulos">
+        <div class="norma-art">
+          <div class="norma-art-num">Estándar — Identificación de peligros</div>
+          <div class="norma-art-texto">Las empresas deben realizar al menos una vez al año la identificación de peligros, evaluación y valoración de riesgos (IPEVR), incluyendo los peligros biomecánicos: posturas, fuerzas y movimientos repetitivos.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Fundamento legal de las Actividades 2, 4 y 5</div>
+        </div>
+        <div class="norma-art">
+          <div class="norma-art-num">Estándar — Medidas de prevención y control</div>
+          <div class="norma-art-texto">Obliga a implementar controles siguiendo la jerarquía: eliminación, sustitución, controles de ingeniería, controles administrativos y EPP. Los biomecánicos deben tratarse en este orden de prioridad.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Jerarquía de controles requerida en la Actividad 6</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="norma-grupo">
+    <div class="norma-header" onclick="toggleNorma(this)">
+      <div class="norma-icon" style="background:#E8F5EE">🏥</div>
+      <div class="norma-title-wrap">
+        <div class="norma-titulo">GATISO / GATISST</div>
+        <div class="norma-subtitulo">Guías de Atención Integral de SST en Enfermedades Osteomusculares</div>
+      </div>
+      <span class="norma-pais">🇨🇴 Colombia</span>
+      <span class="norma-chevron">▼</span>
+    </div>
+    <div class="norma-body">
+      <div class="norma-articulos">
+        <div class="norma-art">
+          <div class="norma-art-num">GATISO — DME Miembro Superior</div>
+          <div class="norma-art-texto">Guía basada en evidencia para la vigilancia, diagnóstico, tratamiento y rehabilitación de DME del miembro superior de origen ocupacional: síndrome del túnel del carpo, epicondilitis, tenosinovitis, entre otros.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Referencia para DME de empacador (túnel del carpo) y floricultor (manguito rotador)</div>
+        </div>
+        <div class="norma-art">
+          <div class="norma-art-num">GATISO — Dolor Lumbar Inespecífico y Enfermedad Discal</div>
+          <div class="norma-art-texto">Define criterios de diagnóstico, exposición ocupacional y medidas preventivas para lumbalgia y hernia discal de origen laboral. Establece que el trabajo con flexión repetida de tronco >45° es un factor de riesgo probado.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Principal DME del floricultor; referencia técnica para la Actividad 5</div>
+        </div>
+        <div class="norma-art">
+          <div class="norma-art-num">GATISO — Hombro Doloroso</div>
+          <div class="norma-art-texto">Guía de atención para patologías del manguito rotador de origen ocupacional. El trabajo con brazo elevado por encima del hombro más del 10% de la jornada es considerado exposición significativa.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Relevante para floricultor (corte de rosas en altura)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="norma-grupo">
+    <div class="norma-header" onclick="toggleNorma(this)">
+      <div class="norma-icon" style="background:#F5F0FF">🌐</div>
+      <div class="norma-title-wrap">
+        <div class="norma-titulo">Normas ISO 11228 y 11226</div>
+        <div class="norma-subtitulo">Estándares internacionales de ergonomía para manipulación manual</div>
+      </div>
+      <span class="norma-pais">🌐 Internacional</span>
+      <span class="norma-chevron">▼</span>
+    </div>
+    <div class="norma-body">
+      <div class="norma-articulos">
+        <div class="norma-art">
+          <div class="norma-art-num">ISO 11228-1 — Levantamiento y transporte</div>
+          <div class="norma-art-texto">Establece límites recomendados para el levantamiento y transporte manual de cargas. Define condiciones ideales (carga ≤25 kg, posición óptima) y factores de corrección. Referencia de la ecuación NIOSH revisada.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Actividad 4 — evaluación de MMC en floricultor y empacador</div>
+        </div>
+        <div class="norma-art">
+          <div class="norma-art-num">ISO 11228-2 — Empuje y tracción</div>
+          <div class="norma-art-texto">Proporciona guías para la evaluación de fuerzas de empuje y tracción. Referencia las tablas de Snook y Ciriello (Liberty Mutual, 1991) como método recomendado. Considera altura de agarre, distancia y frecuencia.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Actividad 4 — evaluación de empuje de carros en floricultura</div>
+        </div>
+        <div class="norma-art">
+          <div class="norma-art-num">ISO 11228-3 — Movimientos repetitivos (alta frecuencia)</div>
+          <div class="norma-art-texto">Específica para manipulación de cargas ligeras a alta frecuencia. Referencia el método OCRA (Índice Ocupacional de Acciones Repetitivas) de Colombini y Occhipinti como método complementario.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Actividad 2 y 5 — evaluación de movimiento repetitivo en empacador y cajero</div>
+        </div>
+        <div class="norma-art">
+          <div class="norma-art-num">ISO 11226 — Posturas estáticas de trabajo</div>
+          <div class="norma-art-texto">Define ángulos de confort articular recomendados para posturas estáticas: cuello ≤25° flexión, hombro &lt;20° sin soporte, codo 60–100° flexión, muñeca ≤15° desviación, tronco &lt;20° flexión.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Referencia para la evaluación postural de la Actividad 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="norma-grupo">
+    <div class="norma-header" onclick="toggleNorma(this)">
+      <div class="norma-icon" style="background:#FEE8EC">📋</div>
+      <div class="norma-title-wrap">
+        <div class="norma-titulo">Resolución 2400 de 1979 y Decreto 1477 de 2014</div>
+        <div class="norma-subtitulo">Estatuto de Seguridad Industrial y Tabla de Enfermedades Laborales</div>
+      </div>
+      <span class="norma-pais">🇨🇴 Colombia</span>
+      <span class="norma-chevron">▼</span>
+    </div>
+    <div class="norma-body">
+      <div class="norma-articulos">
+        <div class="norma-art">
+          <div class="norma-art-num">Res. 2400/1979 — Art. 392</div>
+          <div class="norma-art-texto">Establece pesos máximos referenciales para manipulación manual: 25 kg para hombres adultos y 12,5 kg para mujeres adultas. Aunque hoy se prefiere la ecuación NIOSH (más precisa), este artículo sigue siendo referencia jurídica vigente en Colombia.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Contexto legal colombiano para la Actividad 4</div>
+        </div>
+        <div class="norma-art">
+          <div class="norma-art-num">Decreto 1477 de 2014 — Tabla de Enfermedades Laborales</div>
+          <div class="norma-art-texto">Actualiza la tabla de enfermedades laborales. Incluye explícitamente los DME de origen ocupacional: síndrome del túnel del carpo, epicondilitis, manguito rotador, lumbalgia, entre otras, con los factores de riesgo biomecánico que las originan.</div>
+          <div class="norma-art-aplicacion"><strong>Aplicación en curso:</strong> Fundamento legal para la calificación de origen de las DME — Actividad 5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PLACEHOLDER IA ── -->
+<div id="ia-placeholder" style="max-width:none">
+  <div class="ia-inner">
+    <div class="ia-icon">🤖</div>
+    <h2>Asistente <span>ErgoBot</span></h2>
+    <p>Próximamente podrás consultar conceptos del curso, preparar tus actividades y practicar con preguntas guiadas directamente aquí.</p>
+    <div class="ia-pronto-badge">⚡ Próximamente disponible</div>
+    <div class="ia-features">
+      <div class="ia-feature"><div class="ia-feature-icon">💬</div><div class="ia-feature-text">Responde dudas conceptuales</div></div>
+      <div class="ia-feature"><div class="ia-feature-icon">📝</div><div class="ia-feature-text">Orienta tus actividades evaluadas</div></div>
+      <div class="ia-feature"><div class="ia-feature-icon">🎯</div><div class="ia-feature-text">Genera preguntas de repaso</div></div>
+      <div class="ia-feature"><div class="ia-feature-icon">⚖️</div><div class="ia-feature-text">Explica normativa colombiana</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <strong>ErgoCampus — Peligros Biomecánicos</strong><br>
+  Docente: Jeison Osvaldo Rincón Salamanca · Corporación Universitaria Iberoamericana<br>
+  Seguridad y Salud en el Trabajo · II Ciclo 2026<br>
+  <span style="font-size:0.75rem;opacity:0.5;margin-top:0.5rem;display:block">Recurso docente interactivo — uso educativo exclusivo</span>
+</footer>
+
+<script>
+// ── NAV ACTIVE ──
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section, div[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+  navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#'+current); });
+});
+
+// ── CALCULADORAS ──
+function showCalc(id, btn) {
+  document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('calc-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── NIOSH ──
+function calcNiosh() {
+  const H = parseFloat(document.getElementById('n-h').value);
+  const V = parseFloat(document.getElementById('n-v').value);
+  const D = parseFloat(document.getElementById('n-d').value);
+  const A = parseFloat(document.getElementById('n-a').value);
+  const FM = parseFloat(document.getElementById('n-f').value);
+  const CM = parseFloat(document.getElementById('n-c').value);
+  const peso = parseFloat(document.getElementById('n-peso').value);
+
+  if ([H,V,D,A,FM,CM,peso].some(isNaN)) {
+    alert('Por favor completa todos los campos antes de calcular.');
+    return;
+  }
+
+  const LC = 23;
+  const HM = Math.min(1, 25 / Math.max(H, 25));
+  const VM = Math.max(0, 1 - (0.003 * Math.abs(V - 75)));
+  const DM = 0.82 + (4.5 / Math.max(D, 25));
+  const AM = Math.max(0, 1 - (0.0032 * Math.min(A, 135)));
+
+  const RWL = LC * HM * VM * DM * AM * FM * CM;
+  const IL = peso / RWL;
+
+  document.getElementById('res-rwl').textContent = RWL.toFixed(2) + ' kg';
+  document.getElementById('res-il').textContent = IL.toFixed(2);
+
+  const rb = document.getElementById('res-riesgo');
+  const ri = document.getElementById('res-interpretacion');
+  if (IL <= 1) {
+    rb.className = 'riesgo-badge riesgo-bajo'; rb.textContent = '✅ Riesgo Bajo';
+    ri.textContent = 'IL ≤ 1: La tarea es segura para la mayoría de trabajadores.';
+  } else if (IL <= 2) {
+    rb.className = 'riesgo-badge riesgo-moderado'; rb.textContent = '⚠️ Riesgo Moderado';
+    ri.textContent = 'IL 1–2: Algunos trabajadores pueden estar en riesgo. Rediseñar el puesto.';
+  } else if (IL <= 3) {
+    rb.className = 'riesgo-badge riesgo-alto'; rb.textContent = '🔴 Riesgo Alto';
+    ri.textContent = 'IL 2–3: La mayoría de trabajadores están en riesgo. Intervención necesaria.';
+  } else {
+    rb.className = 'riesgo-badge riesgo-critico'; rb.textContent = '🚨 Riesgo Crítico';
+    ri.textContent = 'IL > 3: Riesgo inaceptable. Intervención urgente e inmediata requerida.';
+  }
+
+  const fDiv = document.getElementById('res-factores');
+  fDiv.innerHTML = [
+    {n:'HM', v:HM.toFixed(2)}, {n:'VM', v:VM.toFixed(2)}, {n:'DM', v:DM.toFixed(2)},
+    {n:'AM', v:AM.toFixed(2)}, {n:'FM', v:FM.toFixed(2)}, {n:'CM', v:CM.toFixed(2)}
+  ].map(f => `<div class="factor-item"><div class="factor-nombre">${f.n}</div><div class="factor-valor">${f.v}</div></div>`).join('');
+
+  const r = document.getElementById('res-niosh');
+  r.classList.add('visible');
+}
+
+// ── RULA ──
+let rulaStep = 1;
+const rulaTotal = 5;
+const rulaScores = {};
+
+function toggleRula(step) {
+  if (step <= rulaStep) {
+    rulaStep = step;
+    updateRulaUI();
+  }
+}
+function nextRula(step) {
+  const sel = document.querySelector(`input[name="r${step}"]:checked`);
+  if (!sel) { alert('Selecciona una opción para continuar.'); return; }
+  rulaScores['r'+step] = parseInt(sel.value);
+  document.getElementById('rula-s'+step).classList.remove('activo');
+  document.getElementById('rula-s'+step).classList.add('completado');
+  rulaStep = step + 1;
+  if (rulaStep <= rulaTotal) {
+    document.getElementById('rula-s'+rulaStep).classList.add('activo');
+  }
+}
+function prevRula(step) {
+  document.getElementById('rula-s'+step).classList.remove('activo');
+  rulaStep = step - 1;
+  document.getElementById('rula-s'+rulaStep).classList.remove('completado');
+  document.getElementById('rula-s'+rulaStep).classList.add('activo');
+}
+function updateRulaUI() {
+  for(let i=1;i<=rulaTotal;i++){
+    const el = document.getElementById('rula-s'+i);
+    el.classList.remove('activo','completado');
+    if(i < rulaStep) el.classList.add('completado');
+    else if(i === rulaStep) el.classList.add('activo');
+  }
+}
+function calcRula() {
+  const sel = document.querySelector('input[name="r5"]:checked');
+  if (!sel) { alert('Selecciona una opción para continuar.'); return; }
+  rulaScores['r5'] = parseInt(sel.value);
+  document.getElementById('rula-s5').classList.remove('activo');
+  document.getElementById('rula-s5').classList.add('completado');
+
+  // Simplified RULA score: weighted combination
+  const r1=rulaScores.r1||1, r2=rulaScores.r2||1, r3=rulaScores.r3||1;
+  const r4=rulaScores.r4||1, r5=rulaScores.r5||1;
+  // Group A: arm+forearm+wrist
+  const groupA = Math.round((r1 + r2 + r3) / 3 * 1.5);
+  // Group B: neck+trunk
+  const groupB = Math.round((r4 + r5) / 2 * 1.5);
+  const total = Math.min(7, Math.round((groupA + groupB) / 2 + 0.5));
+
+  document.getElementById('rula-score-val').textContent = total;
+  const niveles = ['','Riesgo mínimo','Riesgo mínimo','Investigar más','Investigar más','Investigar y cambiar pronto','Investigar y cambiar pronto','Cambio inmediato'];
+  const acciones = ['','Postura aceptable si no se mantiene por períodos prolongados.','Postura aceptable si no se mantiene por períodos prolongados.','Requiere investigación adicional; puede ser necesario realizar cambios.','Requiere investigación adicional; puede ser necesario realizar cambios.','Se requiere investigación y cambios a corto plazo.','Se requiere investigación y cambios a corto plazo.','Nivel de riesgo muy alto — se requieren cambios de forma inmediata.'];
+  document.getElementById('rula-nivel-texto').textContent = 'Nivel de Acción ' + Math.ceil(total/2) + ': ' + (niveles[total]||'—');
+  document.getElementById('rula-accion-texto').textContent = acciones[total]||'—';
+  document.getElementById('rula-resultado').classList.add('visible');
+}
+function resetRula() {
+  rulaStep = 1;
+  for(let i=1;i<=rulaTotal;i++){
+    const el = document.getElementById('rula-s'+i);
+    el.classList.remove('activo','completado');
+    document.querySelectorAll(`input[name="r${i}"]`).forEach(r => r.checked=false);
+  }
+  document.getElementById('rula-s1').classList.add('activo');
+  document.getElementById('rula-resultado').classList.remove('visible');
+}
+
+// ── SELECTOR MÉTODO ──
+const metodoSelecciones = {};
+function setMetodo(cat, val) {
+  metodoSelecciones[cat] = val;
+  const btns = document.querySelectorAll(`.metodo-pregunta:has(button[onclick*="'${cat}',"]) .metodo-opcion`);
+  btns.forEach(b => b.classList.remove('sel'));
+  event.target.classList.add('sel');
+  document.getElementById('metodo-resultado').classList.remove('visible');
+}
+function evaluarMetodo() {
+  const {postura, carga, repetitivo, segmento} = metodoSelecciones;
+  let nombre='', full='', desc='', tags=[];
+
+  if (carga === 'si_pesada' || carga === 'empuje') {
+    if (carga === 'empuje') {
+      nombre = 'ISO 11228-2 + Tablas Snook & Ciriello';
+      full = 'Norma internacional para evaluación de empuje y tracción';
+      desc = 'Para tareas de empuje o tracción de carros, objetos o herramientas. Las tablas de Snook y Ciriello (Liberty Mutual) dan fuerzas máximas aceptables según género, distancia, frecuencia y altura de agarre. Considera fuerza inicial (para iniciar el movimiento) y fuerza sostenida (para mantenerlo).';
+      tags = ['Fuerza inicial', 'Fuerza sostenida', 'ISO 11228-2', 'Actividad 4'];
+    } else {
+      nombre = 'Ecuación NIOSH Revisada';
+      full = 'Waters, Putz-Anderson, Garg & Fine (1993)';
+      desc = 'Para levantamiento y transporte manual de cargas. Calcula el Peso Límite Recomendado (RWL) considerando 6 factores: distancia horizontal, altura, desplazamiento vertical, asimetría, frecuencia y agarre. El Índice de Levantamiento (IL = Peso real/RWL) cuantifica el riesgo: IL>1 hay riesgo, IL>3 riesgo crítico.';
+      tags = ['RWL', 'Índice de Levantamiento', 'ISO 11228-1', 'Actividad 4'];
+    }
+  } else if (repetitivo === 'si_alta' && (segmento === 'superior' || !segmento)) {
+    nombre = 'OCRA (Índice OCRA)';
+    full = 'Occupational Repetitive Actions — Colombini y Occhipinti';
+    desc = 'Específico para movimientos repetitivos del miembro superior a alta frecuencia (ciclos <30 s o >50% del ciclo en el mismo movimiento). Evalúa frecuencia de acciones técnicas, fuerza, postura, movimientos adicionales y factores complementarios. Es la referencia de la ISO 11228-3. Ideal para empacadora de labiales o cajero con alta digitación.';
+    tags = ['Movimiento repetitivo', 'ISO 11228-3', 'Actividad 2', 'Actividad 5'];
+  } else if (postura === 'agachado' || (postura === 'pie' && segmento === 'cuerpo_completo')) {
+    nombre = 'OWAS';
+    full = 'Ovako Working Posture Analysis System — Karhu, Kansi y Kuorinka (1977)';
+    desc = 'Método finlandés que evalúa posturas de espalda, brazos y piernas junto con la carga sostenida, usando muestreo de observación. Clasifica en 4 categorías de acción. Ideal para puestos con gran variedad postural y trabajo de pie, como el floricultor o trabajos en construcción e industria. Simple y rápido de aplicar en campo.';
+    tags = ['Postura global', 'Carga', 'Categorías 1-4', 'Actividad 2'];
+  } else if (segmento === 'cuerpo_completo' || postura === 'ambas') {
+    nombre = 'REBA';
+    full = 'Rapid Entire Body Assessment — Hignett y McAtamney (2000)';
+    desc = 'Evalúa el cuerpo completo con especial atención en posturas imprevisibles o dinámicas (salud, servicios, trabajo en campo). Incluye tronco, cuello, piernas, brazos y carga. Puntaje 1-15. Indicado cuando las posturas son variadas y cambiantes a lo largo del ciclo, como en enfermería, floricultura o servicios.';
+    tags = ['Cuerpo completo', 'Posturas dinámicas', 'Puntaje 1-15', 'Actividad 2'];
+  } else {
+    nombre = 'RULA';
+    full = 'Rapid Upper Limb Assessment — McAtamney y Corlett (1993)';
+    desc = 'El método más usado para evaluar el riesgo en miembro superior. Evalúa brazos, antebrazos, muñecas, cuello y tronco. Puntaje 1-7 con 4 niveles de acción. Ideal para puestos de trabajo sedentes o con trabajo fino de manos: cajero bancario, empacador de labiales, operadores de computador. Aplica para movimientos repetitivos y posturas sostenidas.';
+    tags = ['Miembro superior', 'Puntaje 1-7', 'Niveles de acción', 'Actividad 2'];
+  }
+
+  document.getElementById('met-nombre').textContent = nombre;
+  document.getElementById('met-full').textContent = full;
+  document.getElementById('met-desc').textContent = desc;
+  document.getElementById('met-tags').innerHTML = tags.map(t => `<span class="metodo-tag">${t}</span>`).join('');
+  const res = document.getElementById('metodo-resultado');
+  res.classList.add('visible');
+  res.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ── CASOS ABP ──
+function showCaso(id, tab) {
+  document.querySelectorAll('.caso-detalle').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.caso-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('caso-'+id).classList.add('active');
+  tab.classList.add('active');
+}
+
+// ── NORMATIVA ACCORDIONS ──
+function toggleNorma(header) {
+  const grupo = header.parentElement;
+  const isOpen = grupo.classList.contains('open');
+  document.querySelectorAll('.norma-grupo.open').forEach(g => g.classList.remove('open'));
+  if (!isOpen) grupo.classList.add('open');
+}
+
+// ── RULA opción click ──
+document.querySelectorAll('.rula-opcion').forEach(op => {
+  op.addEventListener('click', function() {
+    const name = this.querySelector('input').name;
+    document.querySelectorAll(`input[name="${name}"]`).forEach(r => r.closest('.rula-opcion').classList.remove('seleccionada'));
+    this.classList.add('seleccionada');
+  });
+});
+</script>
+</body>
+</html>
